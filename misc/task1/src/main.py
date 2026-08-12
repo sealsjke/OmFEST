@@ -19,17 +19,14 @@ def main():
 			user_id = event.user_id
 			user_key = str(user_id)
 
-			print(f"user_id: {user_id}: msg_text: {msg_text}")
 			if msg_text == "Начать".lower():
 				USERS[user_key] = 0
-				print(f"USERS: {USERS}")
 				vk_session.method('messages.send', {
 					'user_id': user_id,
 					'message': f"Добро пожаловать на экзамен по истории Омского CTF движения!\n\n{QUESTIONS[USERS[user_key]]['question']}",
 					'random_id': 0
 				})
-
-			elif msg_text == QUESTIONS[USERS[user_key]]["answer"].lower():
+			elif any(msg_text == i.lower() for i in QUESTIONS[USERS[user_key]]["answer"]):
 				USERS[user_key] += 1
 				if USERS[user_key] == len(QUESTIONS):
 					vk_session.method('messages.send', {
@@ -37,6 +34,7 @@ def main():
 						'message': FLAG,
 						'random_id': 0
 					})
+					USERS[user_key] = 0
 				else:
 					vk_session.method('messages.send', {
 						'user_id': user_id,

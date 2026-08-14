@@ -17,4 +17,6 @@ void loop() {
       delay(SCROLL_DELAY_MS);
     }
   }
+
+  delay(SCROLL_DELAY_MS);
 }

@@ -1,0 +1,225 @@
+Таск №6 — «Последняя строка»
+
+Категория: Hardware / UART / BMC
+Уровень: Beginner–Medium
+
+Большая часть серверной инфраструктуры уже восстановлена, однако один из узлов продолжает работать в диагностическом режиме. BMC загрузился, сенсоры работают, сеть поднялась, хост запущен — но в журнале осталась неизвестная последовательность данных.
+
+Инженеры подозревают, что злоумышленник использовал служебный канал, чтобы передать сообщение непосредственно через консоль управления.
+
+Жёлтая Уточка передаёт командам полный лог загрузки:
+
+«Этот сервер говорит слишком много.
+В нём есть всё: питание, память, датчики, сеть, IPMI…
+Но среди обычных диагностических сообщений кто-то оставил одну последнюю строку.
+Не читайте лог как человек. Прочитайте его как устройство.»
+
+Команде предстоит просмотреть последовательный лог, обнаружить подозрительную передачу, представленную в виде байтов, и восстановить скрытое сообщение.
+
+Найденную строку необходимо представить в формате:
+
+OmFEST{...}
+
+После решения таска диагностический центр Омска возвращается в рабочий режим, а инженеры получают контроль над ещё одним восстановленным серверным узлом.
+
+
+[BOOT] AST2500 BMC
+[BOOT] Initializing DRAM...
+[BOOT] DRAM training started
+[BOOT] DRAM training completed
+[BOOT] Memory test: PASS
+[BOOT] Initializing network...
+[BOOT] MAC address detected
+[BOOT] PHY initialization started
+[BOOT] PHY initialization completed
+[INFO] Board detected
+[INFO] Serial console enabled
+[INFO] Waiting for host...
+[INFO] Host interface initialized
+[INFO] LPC interface ready
+[INFO] PCIe bridge detected
+[INFO] SMBus controller initialized
+[INFO] I2C bus 0 initialized
+[INFO] I2C bus 1 initialized
+[INFO] I2C bus 2 initialized
+[INFO] I2C bus 3 initialized
+[INFO] Scanning I2C bus 0...
+[DEBUG] i2c-0: device 0x20 detected
+[DEBUG] i2c-0: device 0x2d detected
+[DEBUG] i2c-0: device 0x4c detected
+[DEBUG] i2c-0: device 0x50 detected
+[INFO] I2C bus 0 scan complete
+[INFO] Scanning I2C bus 1...
+[DEBUG] i2c-1: device 0x18 detected
+[DEBUG] i2c-1: device 0x30 detected
+[DEBUG] i2c-1: device 0x51 detected
+[INFO] I2C bus 1 scan complete
+[INFO] Scanning I2C bus 2...
+[DEBUG] i2c-2: no device at 0x00
+[DEBUG] i2c-2: device 0x2c detected
+[DEBUG] i2c-2: device 0x4a detected
+[INFO] I2C bus 2 scan complete
+[INFO] Scanning I2C bus 3...
+[DEBUG] i2c-3: device 0x52 detected
+[INFO] I2C bus 3 scan complete
+[INFO] Fan controller initialized
+[INFO] Fan zone 0: automatic control enabled
+[INFO] Fan zone 1: automatic control enabled
+[INFO] Thermal monitor initialized
+[INFO] CPU temperature sensor registered
+[INFO] DIMM temperature sensors registered
+[INFO] Board temperature sensor registered
+[INFO] Voltage monitor initialized
+[INFO] PSU telemetry interface initialized
+[INFO] IPMI stack loading...
+[INFO] IPMI 2.0 support enabled
+[INFO] KCS interface initialized
+[INFO] chassis: ready
+[INFO] sensor scan started
+[DEBUG] sensor 01: CPU_TEMP
+[DEBUG] sensor 02: SYSTEM_TEMP
+[DEBUG] sensor 03: PERIPH_TEMP
+[DEBUG] sensor 04: CPU_VCORE
+[DEBUG] sensor 05: CPU_VSOC
+[DEBUG] sensor 06: DIMM_A1_TEMP
+[DEBUG] sensor 07: DIMM_B1_TEMP
+[DEBUG] sensor 08: DIMM_C1_TEMP
+[DEBUG] sensor 09: DIMM_D1_TEMP
+[DEBUG] sensor 10: FAN1
+[DEBUG] sensor 11: FAN2
+[DEBUG] sensor 12: FAN3
+[DEBUG] sensor 13: FAN4
+[DEBUG] sensor 14: 12V
+[DEBUG] sensor 15: 5V
+[DEBUG] sensor 16: 3V3
+[DEBUG] sensor 17: VBAT
+[INFO] sensor scan: 23 devices found
+[INFO] sensor thresholds loaded
+[INFO] watchdog timer initialized
+[INFO] watchdog timeout: 300 seconds
+[INFO] event log initialized
+[INFO] SEL storage initialized
+[INFO] FRU inventory loading...
+[INFO] FRU: baseboard information loaded
+[INFO] FRU: chassis information loaded
+[INFO] FRU inventory complete
+[INFO] network interface eth0 initialized
+[INFO] DHCP client started
+[DEBUG] DHCP: waiting for lease
+[DEBUG] DHCP: lease acquired
+[INFO] network address configured
+[INFO] DNS resolver initialized
+[INFO] NTP client initialized
+[DEBUG] NTP: synchronizing clock
+[DEBUG] NTP: clock synchronized
+[INFO] web service starting
+[INFO] HTTPS service enabled
+[INFO] Redfish service starting
+[INFO] Redfish endpoint initialized
+[INFO] SSH service disabled
+[INFO] IPMI-over-LAN enabled
+[INFO] authentication database loaded
+[INFO] user database loaded
+[DEBUG] user: ADMIN
+[DEBUG] user: OPERATOR
+[INFO] session manager initialized
+[INFO] host power control initialized
+[INFO] power state: OFF
+[INFO] waiting for host power-on event
+[INFO] host interface heartbeat enabled
+[DEBUG] heartbeat: OK
+[DEBUG] heartbeat: OK
+[DEBUG] heartbeat: OK
+[INFO] PCIe inventory scan started
+[DEBUG] PCIe bus 00: device 00.0 detected
+[DEBUG] PCIe bus 00: device 01.0 detected
+[DEBUG] PCIe bus 00: device 02.0 detected
+[DEBUG] PCIe bus 00: device 03.0 detected
+[INFO] PCIe inventory scan complete
+[INFO] storage controller interface initialized
+[INFO] SATA monitoring interface initialized
+[INFO] NVMe monitoring interface initialized
+[INFO] BIOS communication channel initialized
+[INFO] BIOS version query sent
+[DEBUG] BIOS response received
+[INFO] BIOS version: detected
+[INFO] host CPU information query sent
+[DEBUG] CPU information response received
+[INFO] host memory information query sent
+[DEBUG] memory information response received
+[INFO] system inventory updated
+[INFO] IPMI SEL: 0 pending events
+[INFO] thermal policy: balanced
+[INFO] fan policy: optimal
+[INFO] power policy: balanced
+[DEBUG] POST code monitor enabled
+[DEBUG] POST code: 0x00
+[DEBUG] POST code: 0x01
+[DEBUG] POST code: 0x02
+[DEBUG] POST code: 0x15
+[DEBUG] POST code: 0x2A
+[DEBUG] POST code: 0x40
+[DEBUG] POST code: 0x72
+[INFO] POST monitoring active
+[INFO] host power-on requested
+[INFO] asserting power-enable signal
+[INFO] host power state: ON
+[INFO] host reset signal released
+[INFO] waiting for BIOS heartbeat
+[DEBUG] BIOS heartbeat: OK
+[DEBUG] BIOS heartbeat: OK
+[INFO] operating system heartbeat detected
+[INFO] host operating system is running
+[INFO] monitoring mode enabled
+[DEBUG] CPU_TEMP: 41 C
+[DEBUG] SYSTEM_TEMP: 29 C
+[DEBUG] CPU_VCORE: nominal
+[DEBUG] FAN1: 840 RPM
+[DEBUG] FAN2: 920 RPM
+[DEBUG] FAN3: 880 RPM
+[DEBUG] FAN4: 860 RPM
+[INFO] all monitored values within thresholds
+[DEBUG] SEL write: event=0x01
+[DEBUG] SEL write: event=0x02
+[INFO] SEL update complete
+[INFO] BMC services ready
+[DEBUG] rx: 48 65 6C 6C 6F 20 66 72 6F 6D 20 42 4D 43
+[DEBUG] rx: 00 00 00 00 00 00 00
+[INFO] serial console idle
+[INFO] awaiting management command
+[DEBUG] rx: 53 45 52 56 45 52 5F 4D 4F 44 45 3A 20 45 50 59 43
+[DEBUG] rx: 00 00 00 00 00 00 00
+[INFO] command buffer cleared
+[INFO] no pending commands
+[DEBUG] management session: idle
+[DEBUG] management session: timeout check
+[INFO] IPMI command queue: empty
+[INFO] Redfish polling interval: 5s
+[DEBUG] sensor poll cycle started
+[DEBUG] sensor poll cycle completed
+[DEBUG] fan control cycle started
+[DEBUG] fan control cycle completed
+[INFO] thermal watchdog: OK
+[INFO] voltage watchdog: OK
+[INFO] power watchdog: OK
+[DEBUG] host status query: running
+[DEBUG] host status query: running
+[INFO] chassis intrusion: closed
+[INFO] power supply status: nominal
+[INFO] BMC uptime counter updated
+[DEBUG] network link: up
+[DEBUG] network link speed: 1000 Mbps
+[INFO] management interface ready
+[DEBUG] KCS transaction complete
+[DEBUG] IPMI response sent
+[INFO] waiting for next serial packet
+[DEBUG] serial RX buffer: 23 bytes
+[INFO] diagnostic channel active
+[DEBUG] rx: 4f 6d 46 45 53 54 7b 73 30 5f 31 6e 74 33 72 33 73 74 33 64 5f 74 30 5f 73 33 33 7d   ---- флаг 
+[INFO] serial console idle
+[DEBUG] heartbeat: OK
+[DEBUG] heartbeat: OK
+[DEBUG] heartbeat: OK
+[INFO] system monitoring continues
+[INFO] BMC status: READY
+[INFO] system ready

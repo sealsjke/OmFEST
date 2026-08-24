@@ -1,0 +1,8 @@
+services:
+  omsk-terminal:
+    build: .
+    ports:
+      - "5555:5555"
+    env_file:
+      - .env
+    restart: unless-stopped

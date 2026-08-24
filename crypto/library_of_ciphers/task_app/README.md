@@ -7,7 +7,7 @@
 
 docker compose up --build
 
-Открыть http://localhost:5000
+Открыть http://localhost:5555
 
 ## Логика
 

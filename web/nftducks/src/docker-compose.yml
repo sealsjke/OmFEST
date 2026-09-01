@@ -1,0 +1,14 @@
+services:
+
+  nftducks:
+    build: .
+
+    container_name: nftducks
+
+    ports:
+      - "5000:5000"
+
+    environment:
+      DB_PATH: /app/data/nftducks.db
+
+    restart: unless-stopped

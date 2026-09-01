@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+        <h1>Магазин уток</h1>
+
+        <p>
+            Найдите идеальную утку для своей коллекции.
+        </p>
+    </div>
+
+    <div class="big-duck">
+        🦆
+    </div>
+
+</section>
+
+
+<form class="search-form" method="GET"
+      action="{{ url_for('search') }}">
+
+    <input
+        type="text"
+        name="q"
+        value="{{ search_term|default('') }}"
+        placeholder="Поиск по товарам..."
+    >
+
+    <button type="submit">
+        🔎 Найти
+    </button>
+
+</form>
+
+
+{% if error %}
+
+<div class="error-box">
+    <strong>Ошибка поиска:</strong>
+    {{ error }}
+</div>
+
+{% endif %}
+
+
+{% if search_term %}
+
+<div class="search-info">
+    Результаты поиска для:
+    <strong>{{ search_term }}</strong>
+</div>
+
+{% endif %}
+
+
+<div class="products">
+
+    {% for product in products %}
+
+    <div class="product-card">
+
+        <div class="product-image">
+            🦆
+        </div>
+
+        <div class="product-content">
+
+            <div class="product-id">
+                #{{ product["id"] }}
+            </div>
+
+            <h2>
+                {{ product["name"] }}
+            </h2>
+
+            <p>
+                {{ product["description"] }}
+            </p>
+
+            <button class="buy-button">
+                В корзину
+            </button>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+        Ничего не найдено.
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

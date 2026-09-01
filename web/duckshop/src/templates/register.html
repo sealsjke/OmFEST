@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-card">
+
+    <div class="duck-icon">🦆</div>
+
+    <h1>Регистрация</h1>
+
+    <p class="subtitle">
+        Создайте аккаунт DuckShop
+    </p>
+
+    <form method="POST">
+
+        <label>Логин</label>
+        <input
+            type="text"
+            name="username"
+            placeholder="Придумайте логин"
+            required
+        >
+
+        <label>Пароль</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Придумайте пароль"
+            required
+        >
+
+        <button type="submit">
+            Создать аккаунт
+        </button>
+
+    </form>
+
+    <p class="bottom-text">
+        Уже есть аккаунт?
+        <a href="{{ url_for('login') }}">
+            Войти
+        </a>
+    </p>
+
+</div>
+
+{% endblock %}

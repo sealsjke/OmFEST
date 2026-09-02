@@ -1,0 +1,23 @@
+1. Перетащите устройства в порядке PC, PC, Switch, Switch, Router. Они автоматически получат роли PC1, PC2, SW1, SW2 и R1.
+2. Соедините:
+   - PC1 `FastEthernet0` ↔ SW1 `FastEthernet0/1`
+   - SW1 `FastEthernet0/2` ↔ R1 `GigabitEthernet0/0`
+   - R1 `GigabitEthernet0/1` ↔ SW2 `FastEthernet0/1`
+   - SW2 `FastEthernet0/2` ↔ PC2 `FastEthernet0`
+3. В Desktop → IP Configuration задайте PC1: `192.168.10.10`, `255.255.255.0`, gateway `192.168.10.1`.
+4. Настройте R1:
+
+   enable
+   configure terminal
+   interface g0/0
+   ip address 192.168.10.1 255.255.255.0
+   no shutdown
+   exit
+   interface g0/1
+   ip address 192.168.20.1 255.255.255.0
+   no shutdown
+   end
+   show ip interface brief
+
+5. Задайте PC2: `192.168.20.10`, `255.255.255.0`, gateway `192.168.20.1`.
+6. На PC1 выполните `ping 192.168.20.10`. Только этот запрос после полной server-side validation добавит значение OmFEST{c0nn3c710n_3st4bl1sh3d} к успешному результату.

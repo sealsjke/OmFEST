@@ -1,4 +1,4 @@
-Название: Two-Time Pad
+Название: Same key usage problem
 
 Сложность: Школьники - medium/hard, студенты - easy
 

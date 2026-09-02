@@ -1,0 +1,13 @@
+Найти ответ можно формулой c1 XOR c2 XOR p1, где p1 - уже расшифрованное послание
+
+Возможный код решения:
+
+c1 = bytes.fromhex("4d4d3ae00a372b43a38c49330f0d6f42474034bac468ed26")
+c2 = bytes.fromhex("454106c437433975cc917b7151723745252871b9946cfa6c")
+p1 = b"Gazan in Omsk 6767676767"
+
+p2 = bytes(b1 ^ b2 ^ p for b1, b2, p in zip(c1, c2, p1))
+print(p2.decode("ascii"))
+
+Ответ: OmFEST{XOR_15_n0T_s4f3!}
+

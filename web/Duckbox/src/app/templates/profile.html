@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="profile-grid">
+
+    <div class="card">
+
+        <h2>Профиль</h2>
+
+        <p>
+            Пользователь:
+            <strong>{{ user[0] }}</strong>
+        </p>
+
+        <p>
+            Баланс:
+            <strong>{{ user[1] }} 🪙</strong>
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Перевод монет</h2>
+
+        <form method="POST" action="{{ url_for('transfer') }}">
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Ник получателя"
+                required
+            >
+
+            <input
+                type="number"
+                name="amount"
+                placeholder="Количество"
+                min="1"
+                required
+            >
+
+            <button type="submit">
+                Отправить
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="card shop">
+
+        <h2>Магазин</h2>
+
+        <div class="item">
+
+            <h3>Секретный флаг</h3>
+
+            <p>
+                Особый товар для тех,
+                кто умеет копить.
+            </p>
+
+            <div class="price">
+                {{ flag_price }} 🪙
+            </div>
+
+            <form
+                method="POST"
+                action="{{ url_for('buy_flag') }}"
+            >
+
+                <button type="submit">
+                    Купить
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    {% if flag %}
+
+    <div class="card flag">
+
+        <h2>Покупка успешна!</h2>
+
+        <pre>{{ flag }}</pre>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

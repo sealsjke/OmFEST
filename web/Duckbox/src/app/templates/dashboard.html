@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1>Привет, {{ user[1] }}!</h1>
+
+    <div class="balance">
+        {{ user[3] }} 🪙
+    </div>
+
+    <p class="muted">
+        Ваш баланс
+    </p>
+
+    <form method="POST" action="{{ url_for('claim') }}">
+
+        <button
+            class="claim"
+            type="submit"
+        >
+            Получить монету
+        </button>
+
+    </form>
+
+    {% if user[4] %}
+
+        <p class="muted">
+            Следующая монета будет доступна
+            через 24 часа.
+        </p>
+
+    {% else %}
+
+        <p class="muted">
+            Ежедневная награда доступна.
+        </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

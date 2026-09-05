@@ -1,0 +1,51 @@
+services:
+
+  web:
+    build: .
+    container_name: duckcoin-web
+
+    ports:
+      - "3333:3333"
+
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: duckcoin
+      POSTGRES_USER: duckcoin
+      POSTGRES_PASSWORD: duckcoin
+
+      SECRET_KEY: "kakayatostroka"
+      FLAG: "OmFEST{v3ry_h4rd_r4c3_c0nd1710n_3xpl017}"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+
+  db:
+    image: postgres:16-alpine
+
+    container_name: duckcoin
+
+    environment:
+      POSTGRES_DB: duckcoin
+      POSTGRES_USER: duckcoin
+      POSTGRES_PASSWORD: duckcoin
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U coinrace -d coinrace"
+        ]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+
+volumes:
+  postgres_data:

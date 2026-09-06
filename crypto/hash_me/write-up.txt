@@ -1,0 +1,10 @@
+Хеш — SHA-256, но в словаре rockyou.txt находятся просто пароли, а у нас в задании явная отсылка на оболочку - логично подумать, что это оболочка флага OmFEST{} Поэтому оборачиваем каждое слово:
+
+print(f"OmFEST{{{word}}}")
+
+Генерируем новый wordlist и запускаем:
+
+python generate.py > flags.txt
+hashcat -m 1400 hash.txt flags.txt
+
+Hashcat находит: OmFEST{trustno1}

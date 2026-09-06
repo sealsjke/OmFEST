@@ -1,0 +1,12 @@
+Даны два RSA-модуля с общим простым множителем:
+
+p = gcd(n1, n2)
+q = n1 // p
+phi = (p - 1) * (q - 1)
+d = pow(e, -1, phi)
+m = pow(c, d, n1)
+
+Переводим `m` в байты:
+print(m.to_bytes((m.bit_length()+7)//8, "big").decode())
+
+Флаг: OmFEST{gcd_br34ks_rsa}

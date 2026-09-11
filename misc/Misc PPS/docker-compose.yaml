@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "${PORT:-30003}"
+      FLAG: "${FLAG:?Set FLAG in .env or environment}"
+    ports:
+      - "${PORT:-30003}"

@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "${PORT:-8001}"
+      FLAG: "${FLAG:?Set FLAG in .env or environment}"
+      DATABASE: /data/users.db
+    ports:
+      - "${PORT:-8001}"
+    volumes:
+      - data:/data
+
+volumes:
+  data:

@@ -1,0 +1,13 @@
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HOST=0.0.0.0 \
+    PORT=30003
+
+WORKDIR /app
+COPY server.py ./
+
+USER 10001:10001
+EXPOSE 30003
+CMD ["python", "server.py"]

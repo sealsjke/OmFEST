@@ -8,7 +8,7 @@ Python 3.10+ with no third-party dependencies:
 
 ```sh
 cd tap_tap
-FLAG='OmFEST{1_tri3d_t0_h1d3_th3_fl4g_but_1t_w4s_3v3n_m0r3_0bvi0us}' python3 app.py
+FLAG='OmFEST{cl1ent_s1de_sc0re_is_y0urs}' python3 app.py
 ```
 
 Open http://localhost:8001. Configure `HOST`, `PORT`, `FLAG`, or `DATABASE` using environment variables. Port 8001 keeps this separate from the cookie challenge on port 8000.

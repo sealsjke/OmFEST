@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #101010;
+            color: #eeeeee;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            height: 60px;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #181818;
+            border-bottom: 1px solid #292929;
+        }
+
+        .logo {
+            font-weight: bold;
+        }
+
+        .logout {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .logout:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: #181818;
+            border: 1px solid #292929;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .username {
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        .note {
+            padding: 20px;
+            background: #101010;
+            border: 1px solid #292929;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">Account</div>
+    <a class="logout" href="/logout">Logout</a>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h1>Welcome, {{ username }}</h1>
+
+        <div class="username">
+            Personal account
+        </div>
+
+        <div class="note">
+            {{ note }}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

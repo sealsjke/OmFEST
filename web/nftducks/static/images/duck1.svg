@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<defs><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".18"/><stop offset="1" stop-color="#000000" stop-opacity=".08"/></linearGradient></defs>
+<rect width="800" height="600" fill="#fff7d6"/><circle cx="650" cy="110" r="70" fill="#ffd43b" opacity=".75"/><path d="M0 460 Q180 390 360 460 T800 450 V600 H0Z" fill="#b7e4c7"/>
+<circle cx="575" cy="175" r="55" fill="none" stroke="#ffcf33" stroke-width="12" opacity=".75"/>
+<g transform="translate(205 115)">
+      <ellipse cx="195" cy="330" rx="175" ry="120" fill="#ffd43b"/>
+      <circle cx="175" cy="190" r="125" fill="#ffd43b"/>
+      <circle cx="205" cy="125" r="16" fill="#fff4b0" opacity=".65"/>
+      <ellipse cx="305" cy="225" rx="72" ry="38" fill="#f29f05"/>
+      <ellipse cx="295" cy="215" rx="40" ry="16" fill="#ffc52e" opacity=".8"/>
+      <circle cx="215" cy="165" r="11" fill="#171717"/><circle cx="215" cy="165" r="4" fill="white"/>
+      <path d="M190 205 Q220 225 250 205" fill="none" stroke="#7a4b00" stroke-width="7" stroke-linecap="round"/>
+      <path d="M80 295 Q35 340 75 400" fill="none" stroke="#6b4f00" stroke-width="20" stroke-linecap="round"/>
+      <path d="M300 295 Q350 330 330 390" fill="none" stroke="#6b4f00" stroke-width="20" stroke-linecap="round"/>
+      <ellipse cx="130" cy="355" rx="55" ry="23" fill="#fff4b0" opacity=".55"/>
+    </g>
+<rect x="28" y="28" width="744" height="544" rx="26" fill="none" stroke="#fff4b0" stroke-opacity=".35" stroke-width="3"/>
+<rect width="800" height="600" fill="url(#shade)"/>
+<text x="48" y="525" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b4f00">Sunny Duck #001</text>
+<text x="48" y="558" font-family="Arial, sans-serif" font-size="14" fill="#6b4f00" opacity=".8">A bright sunny duck</text>
+</svg>

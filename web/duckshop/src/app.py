@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 app.secret_key = os.environ.get(
     "SECRET_KEY",
-    "duckshop-ctf-secret"
+    "secret"
 )
 
 DB_PATH = os.environ.get(
@@ -191,6 +191,6 @@ if __name__ == "__main__":
 
     app.run(
         host="0.0.0.0",
-        port=5000,
+        port=int(os.environ.get("PORT", "7777")),
         debug=False
     )

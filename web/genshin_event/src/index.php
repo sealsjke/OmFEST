@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["code"])) {
     $code = $_POST["code"];
 
     if (md5($code) == "0e974114726967211511915142978119") {
-        $message = "Билет подтверждён! Флаг: OmFEST{php_3xpl017_1n_2026}";
+        $message = "Билет подтверждён! Флаг: OmFEST{F4k3_fl4g}";
         $message_type = "success";
     } else {
         $message = "Этот талон недействителен. Попробуйте другой код.";

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NFT Ducks</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        <span class="logo-duck">🦆</span>
+        NFT DUCKS
+    </div>
+
+    <div class="wallet">
+        CONNECT WALLET
+    </div>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <div class="eyebrow">
+                THE DIGITAL DUCK COLLECTION
+            </div>
+
+            <h1>
+                Collect your<br>
+                <span>favorite duck.</span>
+            </h1>
+
+            <p>
+                Discover unique digital ducks from
+                the NFT Ducks collection.
+            </p>
+
+        </div>
+
+        <div class="hero-duck">
+            🦆
+        </div>
+
+    </section>
+
+
+    <section class="catalog">
+
+        <div class="catalog-header">
+
+            <div>
+
+                <h2>
+                    Explore Ducks
+                </h2>
+
+                <p>
+                    Find your next unique collectible.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <nav class="categories">
+
+            <a
+                href="/?category=All"
+                class="{% if category == 'All' %}active{% endif %}"
+            >
+                ALL
+            </a>
+
+            <a
+                href="/?category=Common"
+                class="{% if category == 'Common' %}active{% endif %}"
+            >
+                COMMON
+            </a>
+
+            <a
+                href="/?category=Rare"
+                class="{% if category == 'Rare' %}active{% endif %}"
+            >
+                RARE
+            </a>
+
+            <a
+                href="/?category=Legendary"
+                class="{% if category == 'Legendary' %}active{% endif %}"
+            >
+                LEGENDARY
+            </a>
+
+        </nav>
+
+
+        {% if error %}
+
+        <div class="error-box">
+
+            <strong>
+                Database error:
+            </strong>
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="duck-grid">
+
+        {% for duck in ducks %}
+
+            <article class="duck-card">
+
+                <div class="card-image">
+
+                    <img src="{{ url_for('static', filename='images/duck' ~ duck["id"] ~ '.svg') }}" alt="{{ duck['name'] }}">
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="card-top">
+
+                        <span class="token">
+                            #{{ "%03d"|format(duck["id"]) }}
+                        </span>
+
+                        <span
+                            class="rarity
+                            {% if 'Legendary' in duck['description'] %}
+                                legendary
+                            {% endif %}"
+                        >
+                            NFT
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        {{ duck["name"] }}
+                    </h3>
+
+                    <p>
+                        {{ duck["description"] }}
+                    </p>
+
+
+                    <div class="card-footer">
+
+                        <span>
+                            DIGITAL COLLECTIBLE
+                        </span>
+
+                        <button>
+                            VIEW
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        {% else %}
+
+            <div class="empty">
+
+                No ducks found.
+
+            </div>
+
+        {% endfor %}
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <span>
+        © NFT DUCKS
+    </span>
+
+    <span>
+        UNIQUE DUCKS. UNIQUE STORIES.
+    </span>
+
+</footer>
+
+</body>
+
+</html>

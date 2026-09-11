@@ -1,15 +1,10 @@
 services:
-
-  duckshop:
+  web:
     build: .
-
-    container_name: duckshop
-
     ports:
-      - "5000:5000"
-
+      - "7777"
     environment:
-      DB_PATH: /app/data/duckshop.db
-      SECRET_KEY: duckshop-ctf-secret
-
-    restart: unless-stopped
+      FLAG: ${FLAG}
+      PORT: ${PORT}
+    storage_opt:
+      size: 512m

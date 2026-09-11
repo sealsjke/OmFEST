@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<defs><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".18"/><stop offset="1" stop-color="#000000" stop-opacity=".08"/></linearGradient></defs>
+<rect width="800" height="600" fill="#07131b"/><path d="M0 100H800M0 200H800M0 300H800M0 400H800M0 500H800M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600" stroke="#19d3ff" opacity=".12"/><circle cx="680" cy="110" r="90" fill="#38d9ff" opacity=".08"/>
+<rect x="350" y="180" width="100" height="75" rx="12" fill="#07131b" stroke="#38d9ff" stroke-width="6"/><circle cx="375" cy="215" r="8" fill="#38d9ff"/><circle cx="425" cy="215" r="8" fill="#38d9ff"/><path d="M400 255 V285" stroke="#38d9ff" stroke-width="6"/>
+<g transform="translate(205 115)">
+      <ellipse cx="195" cy="330" rx="175" ry="120" fill="#38d9ff"/>
+      <circle cx="175" cy="190" r="125" fill="#38d9ff"/>
+      <circle cx="205" cy="125" r="16" fill="#b8f3ff" opacity=".65"/>
+      <ellipse cx="305" cy="225" rx="72" ry="38" fill="#f29f05"/>
+      <ellipse cx="295" cy="215" rx="40" ry="16" fill="#ffc52e" opacity=".8"/>
+      <circle cx="215" cy="165" r="11" fill="#171717"/><circle cx="215" cy="165" r="4" fill="white"/>
+      <path d="M190 205 Q220 225 250 205" fill="none" stroke="#7a4b00" stroke-width="7" stroke-linecap="round"/>
+      <path d="M80 295 Q35 340 75 400" fill="none" stroke="#063b4a" stroke-width="20" stroke-linecap="round"/>
+      <path d="M300 295 Q350 330 330 390" fill="none" stroke="#063b4a" stroke-width="20" stroke-linecap="round"/>
+      <ellipse cx="130" cy="355" rx="55" ry="23" fill="#b8f3ff" opacity=".55"/>
+    </g>
+<rect x="28" y="28" width="744" height="544" rx="26" fill="none" stroke="#b8f3ff" stroke-opacity=".35" stroke-width="3"/>
+<rect width="800" height="600" fill="url(#shade)"/>
+<text x="48" y="525" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Cyber Duck #1337</text>
+<text x="48" y="558" font-family="Arial, sans-serif" font-size="14" fill="#d9d9d9" opacity=".8">Cybernetic duck</text>
+</svg>

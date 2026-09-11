@@ -1,7 +1,10 @@
 services:
   web:
     build: .
-    container_name: genshin_web
+    environment:
+      FLAG: ${FLAG}
+      PORT: ${PORT}
     ports:
-      - "8080:80"
-    restart: unless-stopped
+      - "8080"
+    storage_opt:
+      size: 512m

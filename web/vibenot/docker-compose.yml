@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    environment:
+      FLAG: ${FLAG}
+      PORT: ${PORT}
+    ports:
+      - "5555"
+    storage_opt:
+      size: 512m

@@ -1,9 +1,9 @@
-FROM php:8.3-apache
+FROM php:8.3-cli
 
 COPY src/ /var/www/html/
-COPY src/static/ /var/www/html/static/
 
-RUN chown -R www-data:www-data /var/www/html \
-    && a2enmod rewrite
+WORKDIR /var/www/html
 
-EXPOSE 80
+EXPOSE 8080
+
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} -t /var/www/html"]

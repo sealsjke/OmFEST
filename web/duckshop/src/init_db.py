@@ -15,7 +15,7 @@ def initialize_database():
         exist_ok=True
     )
 
-    # Полностью удаляем старую БД
+    
     if os.path.exists(DB_PATH):
 
         os.remove(DB_PATH)
@@ -145,7 +145,7 @@ def initialize_database():
         VALUES (?)
         """,
         (
-            "OmFEST{un10n_b4s3d_duck_sqli}",
+            os.environ.get("FLAG", "OmFEST{un10n_b4s3d_duck_sqli}"),
         )
     )
 

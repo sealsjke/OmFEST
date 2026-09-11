@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<defs><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".18"/><stop offset="1" stop-color="#000000" stop-opacity=".08"/></linearGradient></defs>
+<rect width="800" height="600" fill="#33220a"/><radialGradient id="g"><stop offset="0" stop-color="#fff6a8"/><stop offset="1" stop-color="#d69e2e"/></radialGradient><rect width="800" height="600" fill="url(#g)" opacity=".28"/><circle cx="650" cy="110" r="85" fill="#fff1a8" opacity=".25"/>
+<path d="M320 120 L400 55 L480 120 L400 180Z" fill="#fff3a3" opacity=".8"/><circle cx="400" cy="115" r="105" fill="none" stroke="#ffe66d" stroke-width="6" opacity=".55"/>
+<g transform="translate(205 115)">
+      <ellipse cx="195" cy="330" rx="175" ry="120" fill="#ffd700"/>
+      <circle cx="175" cy="190" r="125" fill="#ffd700"/>
+      <circle cx="205" cy="125" r="16" fill="#fff5a8" opacity=".65"/>
+      <ellipse cx="305" cy="225" rx="72" ry="38" fill="#f29f05"/>
+      <ellipse cx="295" cy="215" rx="40" ry="16" fill="#ffc52e" opacity=".8"/>
+      <circle cx="215" cy="165" r="11" fill="#171717"/><circle cx="215" cy="165" r="4" fill="white"/>
+      <path d="M190 205 Q220 225 250 205" fill="none" stroke="#7a4b00" stroke-width="7" stroke-linecap="round"/>
+      <path d="M80 295 Q35 340 75 400" fill="none" stroke="#7a5200" stroke-width="20" stroke-linecap="round"/>
+      <path d="M300 295 Q350 330 330 390" fill="none" stroke="#7a5200" stroke-width="20" stroke-linecap="round"/>
+      <ellipse cx="130" cy="355" rx="55" ry="23" fill="#fff5a8" opacity=".55"/>
+    </g>
+<rect x="28" y="28" width="744" height="544" rx="26" fill="none" stroke="#fff5a8" stroke-opacity=".35" stroke-width="3"/>
+<rect width="800" height="600" fill="url(#shade)"/>
+<text x="48" y="525" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Golden Duck #001</text>
+<text x="48" y="558" font-family="Arial, sans-serif" font-size="14" fill="#d9d9d9" opacity=".8">Golden collector</text>
+</svg>

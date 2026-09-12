@@ -1,0 +1,836 @@
+/* --- Retro Windows 2000 / Corporate Intranet Aesthetic --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #3a6ea5;
+    background-image: 
+        radial-gradient(#5b8ec5 15%, transparent 16%),
+        radial-gradient(#5b8ec5 15%, transparent 16%);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    font-family: Tahoma, "Segoe UI", "MS Sans Serif", Arial, sans-serif;
+    font-size: 12px;
+    color: #000000;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.os-desktop {
+    width: 95vw;
+    max-width: 1024px;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Windows Frame --- */
+.win-window {
+    background-color: #d4d0c8;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.win-titlebar {
+    background: linear-gradient(90deg, #0a246a 0%, #3a6ea5 50%, #a6caf0 100%);
+    color: #ffffff;
+    padding: 3px 6px;
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.win-titlebar-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.win-icon {
+    font-size: 14px;
+}
+
+.win-titlebar-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.win-btn-ctrl {
+    background: #d4d0c8;
+    border: 1px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    width: 16px;
+    height: 14px;
+    line-height: 12px;
+    text-align: center;
+    cursor: default;
+}
+
+.win-menubar {
+    background: #d4d0c8;
+    border-bottom: 1px solid #808080;
+    padding: 2px 6px;
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    align-items: center;
+}
+
+.win-menu-item {
+    cursor: pointer;
+    padding: 1px 4px;
+}
+
+.win-menu-item:hover {
+    background: #0a246a;
+    color: #ffffff;
+}
+
+.win-menu-clock {
+    margin-left: auto;
+    font-family: monospace;
+    font-size: 11px;
+    color: #333333;
+    font-weight: bold;
+}
+
+.win-content {
+    flex: 1;
+    overflow: hidden;
+    padding: 6px;
+    display: flex;
+}
+
+.win-statusbar {
+    background: #d4d0c8;
+    border-top: 1px solid #808080;
+    padding: 2px 4px;
+    display: flex;
+    gap: 4px;
+    font-size: 11px;
+}
+
+.win-status-pane {
+    border: 1px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 1px 6px;
+    flex: 1;
+}
+
+/* --- Common Win32 Controls --- */
+.win-panel {
+    background: #d4d0c8;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.win-btn {
+    background: #d4d0c8;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    padding: 4px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.win-btn:active {
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 5px 11px 3px 13px;
+}
+
+.win-btn-default {
+    font-weight: bold;
+    border: 2px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    outline: 1px solid #000000;
+}
+
+.win-btn-sm {
+    padding: 2px 6px;
+    font-size: 10px;
+}
+
+.win-input, .win-textarea {
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 4px 6px;
+    font-family: inherit;
+    font-size: 12px;
+    outline: none;
+    width: 100%;
+}
+
+.win-input:focus, .win-textarea:focus {
+    background: #fffffa;
+}
+
+.win-alert {
+    border: 1px solid #000000;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.win-alert-error {
+    background: #ffebe8;
+    border-color: #cc0000;
+    color: #990000;
+}
+
+/* --- Auth Dialogs --- */
+.auth-dialog-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-box {
+    width: 440px;
+    padding: 16px;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    background: #ece9d8;
+}
+
+.auth-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid #a0a0a0;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+.auth-emblem {
+    font-size: 32px;
+}
+
+.auth-title-block h3 {
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #0a246a;
+}
+
+.auth-title-block p {
+    font-size: 11px;
+    color: #555555;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+
+.form-actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.auth-notice {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed #a0a0a0;
+    font-size: 10px;
+    color: #666666;
+    line-height: 1.3;
+}
+
+/* --- Chat Layout --- */
+.chat-container {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+    height: 100%;
+}
+
+.chat-sidebar {
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.employee-card {
+    background: #ffffff;
+    border: 1px solid #808080;
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.employee-avatar {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.employee-details {
+    flex: 1;
+    overflow: hidden;
+}
+
+.employee-name {
+    font-weight: bold;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #0a246a;
+}
+
+.employee-meta {
+    font-size: 10px;
+    color: #555555;
+}
+
+.employee-status {
+    font-size: 9px;
+    color: #008800;
+    font-weight: bold;
+}
+
+.status-indicator-green {
+    color: #00aa00;
+}
+
+.sidebar-section-title {
+    background: #d4d0c8;
+    padding: 2px 4px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #404040;
+    border-bottom: 1px solid #808080;
+    margin-bottom: 4px;
+}
+
+.contacts-list {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #808080;
+    overflow-y: auto;
+}
+
+.contact-item {
+    display: flex;
+    padding: 6px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: #000000;
+    align-items: center;
+    gap: 6px;
+}
+
+.contact-item:hover {
+    background: #f0f4f9;
+}
+
+.contact-item.active {
+    background: #0a246a;
+    color: #ffffff;
+}
+
+.contact-item.active .contact-name,
+.contact-item.active .contact-preview,
+.contact-item.active .contact-time {
+    color: #ffffff;
+}
+
+.contact-avatar {
+    font-size: 20px;
+}
+
+.contact-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.contact-name {
+    font-weight: bold;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-preview {
+    font-size: 10px;
+    color: #666666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.director-contact {
+    background: #fffdf2;
+}
+
+.unread-badge {
+    background: #cc0000;
+    color: #ffffff;
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.contact-time {
+    font-size: 9px;
+    color: #777777;
+}
+
+/* --- Chat Main --- */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.chat-header {
+    background: #ece9d8;
+    border: 1px solid #808080;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.chat-header-avatar {
+    font-size: 24px;
+}
+
+.chat-header-name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #0a246a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chat-header-sub {
+    font-size: 10px;
+    color: #555555;
+    margin-top: 2px;
+}
+
+.tag-confidential {
+    background: #b30000;
+    color: #ffffff;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.tag-boss {
+    background: #0055aa;
+    color: #ffffff;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.chat-warning-banner {
+    background: #ffffd8;
+    border: 1px solid #d0c080;
+    padding: 3px 8px;
+    font-size: 10px;
+    color: #665500;
+    margin-bottom: 4px;
+}
+
+.chat-messages {
+    flex: 1;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 8px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.message-row {
+    display: flex;
+    width: 100%;
+}
+
+.message-incoming {
+    justify-content: flex-start;
+}
+
+.message-outgoing {
+    justify-content: flex-end;
+}
+
+.message-bubble {
+    max-width: 85%;
+    border: 1px solid #c0c0c0;
+    padding: 6px 8px;
+    font-size: 12px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+}
+
+.message-incoming .message-bubble {
+    background: #f4f7fb;
+    border-left: 3px solid #0a246a;
+}
+
+.message-outgoing .message-bubble {
+    background: #f0f0f0;
+    border-right: 3px solid #606060;
+}
+
+.message-sender-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 4px;
+    font-size: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding-bottom: 2px;
+}
+
+.msg-sender {
+    font-weight: bold;
+    color: #0a246a;
+}
+
+.msg-time {
+    color: #888888;
+}
+
+.message-text {
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.chat-empty, .chat-no-selection {
+    margin: auto;
+    text-align: center;
+    color: #888888;
+    font-size: 12px;
+}
+
+.chat-input-area {
+    margin-top: 4px;
+    background: #ece9d8;
+    border: 1px solid #808080;
+    padding: 4px;
+}
+
+.chat-form {
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
+}
+
+.input-wrapper {
+    flex: 1;
+}
+
+.win-textarea {
+    resize: none;
+    height: 48px;
+}
+
+.button-wrapper {
+    display: flex;
+}
+
+.win-btn-send {
+    height: 48px;
+    min-width: 130px;
+    font-weight: bold;
+}
+
+/* --- Memos & Approvals Layout --- */
+.memos-container {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+    height: 100%;
+}
+
+.memos-sidebar {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+}
+
+.memos-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.win-btn-block {
+    display: block;
+    text-align: left;
+    padding: 6px 8px;
+}
+
+.win-btn-active {
+    background: #0a246a;
+    color: #ffffff;
+    font-weight: bold;
+    border-color: #000000;
+}
+
+.network-info-box {
+    background: #ffffff;
+    border: 1px solid #808080;
+    padding: 6px 8px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.net-row {
+    margin-bottom: 3px;
+}
+
+.net-row code {
+    background: #f0f0f0;
+    padding: 1px 4px;
+    font-family: monospace;
+    color: #a00000;
+    border: 1px solid #d0d0d0;
+}
+
+.memos-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    overflow-y: auto;
+    gap: 8px;
+}
+
+.memos-header {
+    background: #ece9d8;
+    border: 1px solid #808080;
+    padding: 8px 10px;
+}
+
+.memos-header-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.memos-header-title h3 {
+    font-size: 13px;
+    color: #0a246a;
+}
+
+.memos-header-desc {
+    font-size: 11px;
+    color: #444444;
+    line-height: 1.3;
+}
+
+.memos-content-split {
+    display: flex;
+    gap: 8px;
+}
+
+.memo-create-section {
+    padding: 8px;
+}
+
+.director-approval-box {
+    flex: 1;
+    padding: 8px;
+    background: #fffde8;
+    display: flex;
+    flex-direction: column;
+}
+
+.section-heading {
+    font-weight: bold;
+    font-size: 11px;
+    color: #0a246a;
+    border-bottom: 1px solid #a0a0a0;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+}
+
+.input-hint {
+    display: block;
+    font-size: 10px;
+    color: #666666;
+    margin-top: 2px;
+}
+
+.form-actions-memo {
+    margin-top: 8px;
+    text-align: right;
+}
+
+.approval-card {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    background: #fffffa;
+    border: 1px solid #d8d0a0;
+    padding: 6px;
+}
+
+.approval-icon {
+    font-size: 24px;
+}
+
+.approval-desc {
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.approval-desc code {
+    background: #f0f0f0;
+    padding: 1px 3px;
+    font-family: monospace;
+}
+
+.approval-form {
+    margin-top: auto;
+    text-align: center;
+}
+
+.win-btn-approve {
+    width: 100%;
+    padding: 8px;
+    font-weight: bold;
+    background: #d4e8d4;
+    border-color: #80a080;
+    color: #004400;
+}
+
+.win-btn-approve:hover:not(:disabled) {
+    background: #c0e0c0;
+}
+
+.approval-restriction-notice {
+    font-size: 10px;
+    color: #aa0000;
+    margin-top: 6px;
+}
+
+.memos-table-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-wrapper {
+    flex: 1;
+    background: #ffffff;
+    overflow-y: auto;
+    max-height: 180px;
+}
+
+.win-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.win-table th {
+    background: #ece9d8;
+    border: 1px solid #808080;
+    padding: 4px 6px;
+    text-align: left;
+    font-weight: bold;
+    user-select: none;
+    position: sticky;
+    top: 0;
+}
+
+.win-table td {
+    border: 1px solid #e0e0e0;
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+.win-table tr:hover {
+    background: #f0f4f9;
+}
+
+.memo-link {
+    color: #0033cc;
+    text-decoration: underline;
+    font-family: monospace;
+    font-size: 10px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: bold;
+    border-radius: 2px;
+}
+
+.badge-pending {
+    background: #fff0aa;
+    color: #665500;
+    border: 1px solid #ccbb44;
+}
+
+.badge-visited {
+    background: #cce5ff;
+    color: #004085;
+    border: 1px solid #b8daff;
+}
+
+.badge-approved {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.win-alert-success {
+    background: #e8f5e9;
+    border-color: #2e7d32;
+    color: #1b5e20;
+}
+

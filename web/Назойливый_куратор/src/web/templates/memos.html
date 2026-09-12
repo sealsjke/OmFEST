@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Служебные записки и согласования — «ГлавСпецСвязь»{% endblock %}
+
+{% block content %}
+<div class="memos-container">
+    <!-- Left Panel: Profile & Actions -->
+    <div class="memos-sidebar win-panel">
+        <div class="employee-card">
+            <div class="employee-avatar">{{ current_user.avatar }}</div>
+            <div class="employee-details">
+                <div class="employee-name">{{ current_user.display_name }}</div>
+                <div class="employee-meta">{{ current_user.department }}</div>
+                <div class="employee-status">
+                    <span class="status-indicator-green">●</span> Таб. № {{ 1000 + current_user.id }}
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section-title">
+            <span>НАВИГАЦИЯ</span>
+        </div>
+
+        <div class="memos-nav">
+            <a href="{{ url_for('index') }}" class="win-btn win-btn-block">💬 Вернуться в мессенджер</a>
+            <a href="{{ url_for('memos') }}" class="win-btn win-btn-block win-btn-active">📋 Служебные записки</a>
+        </div>
+
+        <div class="sidebar-section-title" style="margin-top: 10px;">
+            <span>ИНФОРМАЦИЯ О СЕТИ</span>
+        </div>
+        <div class="network-info-box">
+            <div class="net-row"><b>Контур:</b> Защищенный интранет</div>
+            <div class="net-row"><b>Внутренний узел:</b> <code>http://web:5000</code></div>
+            <div class="net-row"><b>АРМ Директора:</b> arm-director.corp.lan</div>
+            <div class="net-row"><b>Регламент:</b> №48-ДСП (от 01.09.2026)</div>
+        </div>
+    </div>
+
+    <!-- Right Panel: Main Memos Section -->
+    <div class="memos-main win-panel">
+        <div class="memos-header">
+            <div class="memos-header-title">
+                <h3>📋 Подсистема подачи служебных записок и согласований</h3>
+                <span class="tag-boss">АРМ РУКОВОДИТЕЛЯ</span>
+            </div>
+            <div class="memos-header-desc">
+                Регламент согласования: Все служебные записки на получение разовых кодов допуска передаются Генеральному директору. Генеральный директор лично проверяет материалы по указанной ссылке на своем терминале и утверждает допуск.
+            </div>
+        </div>
+
+        {% if error %}
+        <div class="win-alert win-alert-error" style="margin: 6px 0;">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+
+        {% if success %}
+        <div class="win-alert win-alert-success" style="margin: 6px 0;">
+            ✅ {{ success }}
+        </div>
+        {% endif %}
+
+        <!-- Form to submit memo -->
+        <div class="memo-create-section win-panel">
+            <div class="section-heading">Подать служебную записку Генеральному директору</div>
+            <form method="POST" action="{{ url_for('memos') }}" class="memo-form">
+                <div class="form-group">
+                    <label for="title">Тема служебной записки:</label>
+                    <input type="text" name="title" id="title" class="win-input" placeholder="Например: Запрос на выдачу кода доступа к спец-оборудованию" required value="Запрос на выдачу кода доступа к спец-оборудованию">
+                </div>
+
+                <div class="form-group">
+                    <label for="url">Ссылка на материалы проверки / аудит (URL или внутренний адрес):</label>
+                    <input type="text" name="url" id="url" class="win-input" placeholder="http://web:5000/... или /..." required>
+                    <span class="input-hint">Генеральный директор перейдет по указанному адресу со своего защищенного АРМ в течение 15 секунд.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="comment">Служебный комментарий (обоснование):</label>
+                    <textarea name="comment" id="comment" rows="2" class="win-textarea" placeholder="Укажите причину запроса допуска..."></textarea>
+                </div>
+
+                <div class="form-actions-memo">
+                    <button type="submit" class="win-btn win-btn-default">
+                        📤 Направить служебную записку Директору
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Memos Log / History Table -->
+        <div class="memos-table-section">
+            <div class="section-heading">Реестр поданных служебных записок</div>
+            <div class="table-wrapper win-panel">
+                <table class="win-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">№</th>
+                            <th>Тема записки</th>
+                            <th>Ссылка на материалы</th>
+                            <th style="width: 120px;">Автор</th>
+                            <th style="width: 140px;">Время подачи</th>
+                            <th style="width: 170px;">Статус рассмотрения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in memos %}
+                        <tr>
+                            <td>{{ m.id }}</td>
+                            <td><b>{{ m.title }}</b></td>
+                            <td><a href="{{ m.url }}" target="_blank" class="memo-link">{{ m.url | truncate(35) }}</a></td>
+                            <td>{{ m.author_name }}</td>
+                            <td>{{ m.created_at }}</td>
+                            <td>
+                                {% if m.status == 'approved' %}
+                                <span class="badge badge-approved">✅ УТВЕРЖДЕНО</span>
+                                {% elif m.status == 'visited' %}
+                                <span class="badge badge-visited">👀 МАТЕРИАЛЫ ИЗУЧЕНЫ</span>
+                                {% else %}
+                                <span class="badge badge-pending">⏳ НА РАССМОТРЕНИИ</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #777777; padding: 12px;">
+                                Служебных записок в реестре пока нет. Заполните форму выше для подачи.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

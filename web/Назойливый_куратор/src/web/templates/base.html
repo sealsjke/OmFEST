@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Корпоративный Вестник «ГлавСпецСвязь»{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="os-desktop">
+        <div class="win-window">
+            <div class="win-titlebar">
+                <div class="win-titlebar-text">
+                    <span class="win-icon">🏢</span>
+                    АРМ «ИнтраСвязь-2000» v2.4.1 [ЗАО «ГлавСпецСвязь» — ГРИФ: ДСП]
+                </div>
+                <div class="win-titlebar-controls">
+                    <button class="win-btn-ctrl" title="Свернуть">_</button>
+                    <button class="win-btn-ctrl" title="Развернуть">□</button>
+                    <button class="win-btn-ctrl win-close" title="Закрыть">✕</button>
+                </div>
+            </div>
+
+            <div class="win-menubar">
+                <a href="{{ url_for('index') }}" class="win-menu-item" style="text-decoration: none; color: inherit;">💬 Диалоги</a>
+                {% if session.get('role') in ['boss', 'director'] %}
+                <a href="{{ url_for('memos') }}" class="win-menu-item" style="text-decoration: none; color: inherit; font-weight: bold; background: #c0d8f0; border: 1px solid #7090b0; padding: 0 4px;">📋 Служебные записки [НОВОЕ]</a>
+                {% endif %}
+                <span class="win-menu-item">Шифрование</span>
+                <span class="win-menu-item">Справка</span>
+                {% if session.get('user_id') %}
+                <a href="{{ url_for('logout') }}" class="win-menu-item" style="text-decoration: none; color: inherit; margin-left: 8px;">Выход</a>
+                {% endif %}
+                <span class="win-menu-clock" id="live-clock">--:--:--</span>
+            </div>
+
+            <div class="win-content">
+                {% block content %}{% endblock %}
+            </div>
+
+            <div class="win-statusbar">
+                <div class="win-status-pane">Шифрование: ГОСТ 28147-89 (АРМ-КЛИЕНТ)</div>
+                <div class="win-status-pane">Связь: 10 Мбит/с [СТАБИЛЬНО]</div>
+                <div class="win-status-pane">Сервер: web:5000 (внутренний шлюз)</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ru-RU');
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) clockEl.textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>

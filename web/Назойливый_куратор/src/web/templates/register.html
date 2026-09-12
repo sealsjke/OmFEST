@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация сотрудника — «ГлавСпецСвязь»{% endblock %}
+
+{% block content %}
+<div class="auth-dialog-wrapper">
+    <div class="auth-box win-panel">
+        <div class="auth-header">
+            <div class="auth-emblem">📋</div>
+            <div class="auth-title-block">
+                <h3>Регистрационная анкета нового сотрудника</h3>
+                <p>Заполнение личной карточки для предоставления доступа к внутренней сети</p>
+            </div>
+        </div>
+
+        {% if error %}
+        <div class="win-alert win-alert-error">
+            <span class="alert-icon">⚠️</span>
+            <div class="alert-text">{{ error }}</div>
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('register') }}" class="win-form">
+            <div class="form-group">
+                <label for="username">Служебный логин (английскими буквами):</label>
+                <input type="text" id="username" name="username" class="win-input" required autofocus placeholder="ivanov_ii">
+            </div>
+
+            <div class="form-group">
+                <label for="display_name">Фамилия Имя Отчество сотрудника:</label>
+                <input type="text" id="display_name" name="display_name" class="win-input" required placeholder="Иванов Иван Иванович">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Подразделение / Отдел:</label>
+                <select id="department" name="department" class="win-input">
+                    <option value="Отдел снабжения">Отдел материально-технического снабжения</option>
+                    <option value="Бухгалтерия">Центральная бухгалтерия</option>
+                    <option value="Технический отдел">Служба главного инженера</option>
+                    <option value="Архив предприятия">Общий архив и канцелярия</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль для доступа:</label>
+                <input type="password" id="password" name="password" class="win-input" required placeholder="••••••••">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="win-btn win-btn-default">Зарегистрироваться</button>
+                <a href="{{ url_for('login') }}" class="win-btn">Вернуться к авторизации</a>
+            </div>
+        </form>
+
+        <div class="auth-notice">
+            После регистрации учетная запись будет автоматически поставлена на контроль непосредственного руководителя (Начальник отдела).
+        </div>
+    </div>
+</div>
+{% endblock %}

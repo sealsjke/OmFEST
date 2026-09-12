@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block title %}Служебные диалоги — «ГлавСпецСвязь»{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <!-- Left Sidebar: Employee Card & Contact List -->
+    <div class="chat-sidebar win-panel">
+        <div class="employee-card">
+            <div class="employee-avatar">{{ current_user.avatar }}</div>
+            <div class="employee-details">
+                <div class="employee-name">{{ current_user.display_name }}</div>
+                <div class="employee-meta">{{ current_user.department }}</div>
+                <div class="employee-status">
+                    <span class="status-indicator-green">●</span> В сети (Таб. № {{ 1000 + current_user.id }})
+                </div>
+            </div>
+            <div class="employee-actions">
+                <a href="{{ url_for('logout') }}" class="win-btn win-btn-sm" title="Завершить текущий сеанс">Выход</a>
+            </div>
+        </div>
+
+        <div class="sidebar-section-title">
+            <span>СЛУЖЕБНЫЕ КОНТАКТЫ</span>
+        </div>
+
+        <div class="contacts-list">
+            {% for contact in contacts %}
+            <a href="{{ url_for('index', username=contact.username) }}" 
+               class="contact-item {% if active_target and active_target.username == contact.username %}active{% endif %} {% if contact.role == 'director' %}director-contact{% endif %}">
+                <div class="contact-avatar">{{ contact.avatar }}</div>
+                <div class="contact-info">
+                    <div class="contact-name">
+                        {{ contact.display_name }}
+                    </div>
+                    <div class="contact-preview">
+                        {% if contact.last_message %}
+                            {{ contact.last_message | striptags | truncate(35) }}
+                        {% else %}
+                            <i>Нет новых сообщений</i>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="contact-meta">
+                    {% if contact.last_time %}
+                    <span class="contact-time">{{ contact.last_time.split(' ')[1] }}</span>
+                    {% endif %}
+                    {% if contact.unread_count and contact.unread_count > 0 %}
+                    <span class="unread-badge">{{ contact.unread_count }}</span>
+                    {% endif %}
+                </div>
+            </a>
+            {% else %}
+            <div class="no-contacts">Нет доступных контактов</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Right Area: Active Chat Dialogue -->
+    <div class="chat-main win-panel">
+        {% if active_target %}
+        <div class="chat-header">
+            <div class="chat-header-avatar">{{ active_target.avatar }}</div>
+            <div class="chat-header-info">
+                <div class="chat-header-name">
+                    {{ active_target.display_name }}
+                    {% if active_target.role == 'director' %}
+                    <span class="tag-confidential">ГРИФ: СЕКРЕТНО</span>
+                    {% elif active_target.role == 'boss' %}
+                    <span class="tag-boss">РУКОВОДИТЕЛЬ</span>
+                    {% endif %}
+                </div>
+                <div class="chat-header-sub">
+                    Логин: <b>{{ active_target.username }}</b> | Подразделение: {{ active_target.department }} | Канал: Защищенный
+                </div>
+            </div>
+        </div>
+
+        {% if current_user.role in ['boss', 'director'] and active_target.role == 'director' %}
+        <div class="chat-warning-banner" style="background: #e6f2ff; border-color: #70a0d0; color: #0a246a; display: flex; justify-content: space-between; align-items: center;">
+            <span>ℹ️ <b>Новая функция:</b> Согласование допуска и отправка материалов на проверку Директору вынесены в специальный раздел.</span>
+            <a href="{{ url_for('memos') }}" class="win-btn win-btn-sm" style="font-weight: bold; background: #c0d8f0; white-space: nowrap; margin-left: 8px;">📋 Открыть «Служебные записки» &raquo;</a>
+        </div>
+        {% else %}
+        <div class="chat-warning-banner">
+            ⚠️ <b>Внимание:</b> Переписка в данном окне подлежит обязательной регистрации и периодическому контролю руководством предприятия.
+        </div>
+        {% endif %}
+
+        <div class="chat-messages" id="chat-messages">
+            {% for msg in messages %}
+            <div class="message-row {% if msg.sender_id == current_user.id %}message-outgoing{% else %}message-incoming{% endif %}">
+                <div class="message-bubble">
+                    <div class="message-sender-bar">
+                        <span class="msg-sender">{{ msg.sender_name }}</span>
+                        <span class="msg-time">{{ msg.created_at }}</span>
+                    </div>
+                    <!-- INTENTIONAL XSS VULNERABILITY: Raw HTML rendered via safe for incoming messages (triggers against bot) -->
+                    {% if msg.sender_id == current_user.id %}
+                    <div class="message-text">{{ msg.content }}</div>
+                    {% else %}
+                    <div class="message-text">{{ msg.content | safe }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="chat-empty">
+                История сообщений пуста. Напишите служебную записку для начала диалога.
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="chat-input-area">
+            <form method="POST" action="{{ url_for('send_message') }}" class="chat-form" id="chat-form">
+                <input type="hidden" name="receiver_username" value="{{ active_target.username }}">
+                <div class="input-wrapper">
+                    <textarea name="content" id="message-input" rows="2" class="win-textarea" placeholder="Введите текст служебного сообщения или отчета..." required></textarea>
+                </div>
+                <div class="button-wrapper">
+                    <button type="submit" class="win-btn win-btn-send">
+                        ✉️ Отправить (Enter)
+                    </button>
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <div class="chat-no-selection">
+            <h3>Диалог не выбран</h3>
+            <p>Выберите сотрудника из списка слева для просмотра переписки.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // Auto-scroll chat to bottom
+    const messagesBox = document.getElementById('chat-messages');
+    if (messagesBox) {
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+
+    // Submit on Enter without Shift
+    const textarea = document.getElementById('message-input');
+    const form = document.getElementById('chat-form');
+    if (textarea && form) {
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (textarea.value.trim().length > 0) {
+                    form.submit();
+                }
+            }
+        });
+    }
+
+    // Auto-refresh chat every 6 seconds to see new replies without page flicker
+    {% if active_target %}
+    setInterval(() => {
+        // Only refresh if user is not currently actively typing long message
+        if (textarea && textarea.value.length === 0) {
+            fetch("{{ url_for('api_messages', username=active_target.username) }}")
+                .then(r => r.json())
+                .then(data => {
+                    if (data && data.messages) {
+                        const currentCount = document.querySelectorAll('.message-row').length;
+                        if (data.messages.length > currentCount) {
+                            location.reload();
+                        }
+                    }
+                })
+                .catch(() => {});
+        }
+    }, 6000);
+    {% endif %}
+</script>
+{% endblock %}

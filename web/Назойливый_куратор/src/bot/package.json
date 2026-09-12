@@ -1,0 +1,12 @@
+{
+  "name": "annoying-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "^22.15.0"
+  }
+}

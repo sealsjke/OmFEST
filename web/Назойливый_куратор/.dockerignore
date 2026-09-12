@@ -1,0 +1,15 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db
+.git
+.gitignore
+.env
+node_modules
+solve.py
+task.md
+ctfd.md
+README.md
+*.tar.gz
+*.zip

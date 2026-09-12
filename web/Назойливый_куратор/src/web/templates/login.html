@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход в систему — «ГлавСпецСвязь»{% endblock %}
+
+{% block content %}
+<div class="auth-dialog-wrapper">
+    <div class="auth-box win-panel">
+        <div class="auth-header">
+            <div class="auth-emblem">🔐</div>
+            <div class="auth-title-block">
+                <h3>Идентификация сотрудника</h3>
+                <p>Единая автоматизированная система внутреннего обмена служебными сообщениями</p>
+            </div>
+        </div>
+
+        {% if error %}
+        <div class="win-alert win-alert-error">
+            <span class="alert-icon">⚠️</span>
+            <div class="alert-text">{{ error }}</div>
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('login') }}" class="win-form">
+            <div class="form-group">
+                <label for="username">Имя учетной записи (Логин):</label>
+                <input type="text" id="username" name="username" class="win-input" required autofocus placeholder="например: ivanov_ii">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль доступа:</label>
+                <input type="password" id="password" name="password" class="win-input" required placeholder="••••••••">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="win-btn win-btn-default">Вход в систему</button>
+                <a href="{{ url_for('register') }}" class="win-btn">Регистрация сотрудника</a>
+            </div>
+        </form>
+
+        <div class="auth-notice">
+            <b>Внимание!</b> Несанкционированный доступ, перехват сообщений третьих лиц и нарушение регламента № 48-Б преследуются службой внутренней безопасности предприятия.
+        </div>
+    </div>
+</div>
+{% endblock %}

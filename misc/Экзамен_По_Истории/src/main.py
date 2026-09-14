@@ -28,7 +28,6 @@ def main():
 				})
 			elif any(msg_text == i.lower() for i in QUESTIONS[USERS[user_key]]["answer"]):
 				USERS[user_key] += 1
-				question = f"Вопрос {USERS[user_key] + 1}/{len(QUESTIONS)}\n\n{QUESTIONS[USERS[user_key]]['question']}"
 				if USERS[user_key] == len(QUESTIONS):
 					vk_session.method('messages.send', {
 						'user_id': user_id,
@@ -39,7 +38,7 @@ def main():
 				else:
 					vk_session.method('messages.send', {
 						'user_id': user_id,
-						'message': question,
+						'message': f"Вопрос {USERS[user_key] + 1}/{len(QUESTIONS)}\n\n{QUESTIONS[USERS[user_key]]['question']}",
 						'random_id': 0
 					})
 			else:
@@ -53,7 +52,7 @@ def main():
 
 				vk_session.method('messages.send', {
 					'user_id': user_id,
-					'message': question,
+					'message': f"Вопрос {USERS[user_key] + 1}/{len(QUESTIONS)}\n\n{QUESTIONS[USERS[user_key]]['question']}",
 					'random_id': 0
 				})
 

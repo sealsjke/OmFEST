@@ -4,7 +4,7 @@ Easy
  
 IP-адрес и порт сервиса 
 
-Флаг: OmFEST{duck_mqtt_lights_on}
+Флаг: OmFEST{qu4ck_m3tr0p0l1s_l1ghts_1gn1t3d_by_y3ll0w_duck}
 
 ---
 
